@@ -2,6 +2,6 @@
 
 ## eth-apis
 
-To run issue
+Command to run:
 `tsc && node dist/server.js`
 
