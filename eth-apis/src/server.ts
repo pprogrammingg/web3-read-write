@@ -54,28 +54,6 @@ app.get('/get-token-transactions', async (req: Request, res: Response) => {
     }
 });
 
-// Endpoint to fetch all transfer transactions and write to a JSON file
-// app.get('/get-all-transfer-transactions', async (req: Request, res: Response) => {
-//     const accountAddress = req.query.accountAddress as string || '0x9A9F1F7B50A4bA8adFE136cf660ee7d8836fc075' ;
-  
-//     if (!accountAddress) {
-//       res.status(400).json({ error: 'Missing accountAddress parameter' });
-//       return;
-//     }
-  
-//     try {
-//       await fetchAllTransactions(accountAddress);
-//       res.json({ message: 'All transfer transactions fetched and written to file.' });
-//     } catch (error: any) {
-//       console.error('Error fetching all transfer transactions:', error.message);
-//       res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
-
-
-
-
-
 app.listen(port, () => {
     console.log(`Server ius running on http://localhost:${port}`);
 });

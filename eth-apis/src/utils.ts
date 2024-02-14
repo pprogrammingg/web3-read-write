@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
-import fs from 'fs';
-import axios from 'axios';
 
-// transfer transaction from EtherScan
+/**
+ * Desired Input Structure
+ */
 export interface InputJson {
   blockNumber: string;
   timeStamp: string;
@@ -25,7 +25,9 @@ export interface InputJson {
   confirmations: string;
 }
 
-// formatted transfer transaction for Integral
+/**
+ * Desired Output Structure
+ */
 export interface TransferTxOutput {
   id: string;
   accountId: string;
@@ -115,74 +117,4 @@ export function filterByTokenSymbol(transactions: TransferTxOutput[], tokenSymbo
         return transactions;
       }
 }
-
-/**
- * fetch all transactions for an account
-*/
-// Internal function to fetch and write transfer transactions to a JSON file
-// async function fetchAndWriteTransactions(page: number, accountAddress: string): Promise<void> {
-//     const apiKey = '26Y7IBZ8M1IG48RZY1KH32PDZQZVF2VTSS';
-//     const pageSize = 1000; // Number of transactions per page
-  
-//     try {
-//       console.log(`Fetching transactions for page ${page}...`);
-  
-//       const response = await axios.get('https://api.etherscan.io/api', {
-//         params: {
-//           module: 'account',
-//           action: 'tokentx',
-//           address: accountAddress,
-//           page,
-//           offset: pageSize,
-//           startblock: 0,
-//           endblock: 27025780,
-//           sort: 'desc',
-//           apikey: apiKey,
-//         },
-//       });
-  
-//       console.log('Etherscan API response called by /get-token-transactions:', response.data);
-//       const transactions = response.data.result;
-  
-//       if (transactions.length > 0) {
-//         console.log(`Writing transactions for page ${page} to file...`);
-  
-//         const transactions = response.data.result;
-
-//         // format the response json
-//         let formattedTransactions = formatTransferTxJsonArray(transactions, accountAddress);
-
-
-//         const fileName = 'account_transfer_records.json';
-//         const fileData = fs.existsSync(fileName) ? JSON.parse(fs.readFileSync(fileName, 'utf-8')) : [];
-//         fileData.push(...formattedTransactions);
-//         fs.writeFileSync(fileName, JSON.stringify(fileData, null, 2));
-  
-//         console.log(`Transactions for page ${page} written to file.`);
-//       } else {
-//         console.log(`No more transactions for page ${page}. Stopping.`);
-//       }
-//     } catch (error: any) {
-//       console.error(`Error fetching/writing transactions for page ${page}:`, error.message);
-//     }
-//   }
-  
-  // Function to fetch transactions for all pages and write to a JSON file
-//   export async function fetchAllTransactions(accountAddress: string): Promise<void> {
-//     let page = 1;
-  
-//     // Continue fetching and writing transactions until there are no more records
-//     while (true) {
-//       const hasMoreTransactions  = await fetchAndWriteTransactions(page, accountAddress);
-//       page += 1;
-      
-//       // mitigate rate limit issue
-//       await new Promise(resolve => setTimeout(resolve, 500));
-//       // Check if there are more transactions
-//     if (hasMoreTransactions ) {
-//         console.log(`No more transactions for page ${page}. Stopping.`);
-//         return false;
-//       }
-//     }
-//   }
   
